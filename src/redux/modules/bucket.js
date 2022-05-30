@@ -1,11 +1,18 @@
 // 액션 타입을 정해줍니다.
 const CREATE = "bucket/CREATE";
+const UPDATE = "bucket/UPDATE";
 const DELETE = "bucket/DELETE";
 
 
 // 초기 상태값을 만들어줍니다.
 const initialState = {
-  list: ["영화관 가기", "매일 책읽기", "수영 배우기"],
+  list: [
+    {text: "영화관가기", complete: false},
+    {text: "매일 책읽기", complete: false},
+    {text: "수영 배우기", complete: false},
+
+],
+  // list: ["영화관 가기", "매일 책읽기", "수영 배우기"],
 };
 
 // 액션 생성 함수예요.
@@ -17,10 +24,16 @@ const initialState = {
 export const createBucket = (bucket) => {
   return { type: CREATE, bucket };
 };
+
+export function updateBucket(bucket_index) {
+  return {type: UPDATE, bucket_index};
+}
+
 export const deleteBucket = (bucket_index) => {
   console.log("지울 버킷 인덱스" , bucket_index);
   return { type: DELETE , bucket_index };
 };
+
 
 
 
@@ -32,7 +45,18 @@ export default function reducer(state = initialState, action = {}) {
       const new_bucket_list = [...state.list, action.bucket];
       return { list: new_bucket_list };
     }
-  
+    case "bucket/UPDATE" : {
+      console.log(state,action);
+      const new_bucket_list = state.list.map((l, idx) => {
+        if(parseInt(action.bucket_index) === idx) {
+            return {...l, complete: true};
+        } else {
+          return l;
+        }
+      })
+      console.log({list: new_bucket_list});
+      return {list: new_bucket_list};
+    }
     case "bucket/DELETE": {
       console.log(state,action);
       const new_bucket_list = state.list.filter((data, idx) => {

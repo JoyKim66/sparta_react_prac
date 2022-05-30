@@ -18,14 +18,14 @@ const BucketList = (props) => {
     <ListStyle>
       {my_lists.map((list, index) => {
         return (
-          <ItemStyle
+          <ItemStyle complete = {list.complete}
             className="list_item"
             key={index}
             onClick={() => {
-              history.push("/detail/" + index);
+              history.push("/detail/"+index);
             }}
           >
-            {list}
+            {list.text}
           </ItemStyle>
         );
       })}
@@ -44,7 +44,8 @@ const ListStyle = styled.div`
 const ItemStyle = styled.div`
   padding: 16px;
   margin: 8px;
-  background-color: aliceblue;
+  background-color: 
+  ${(props) => (props.complete? "orange" : "aliceblue")}
 `;
 
 export default BucketList;
