@@ -27,7 +27,16 @@ function App() {
     //   console.log(response);
     // });
 
-    axios.get("http://localhost:5001/sleep_times").then(response => {
+    // axios.get("http://localhost:5001/sleep_times").then(response => {
+    //   console.log(response);
+    // });
+    
+    let data = {
+      "day": "일",
+      "sleep_times": "10:00",
+    };
+
+    axios.post("http://localhost:5001/sleep_times", {data}).then(response => {
       console.log(response);
     });
   }
