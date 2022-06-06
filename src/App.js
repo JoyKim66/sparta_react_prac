@@ -20,10 +20,14 @@ function App() {
   }
 
   const callSomethingAxios = () => {
-    axios({
-      method: "get",
-      url: "http://localhost:5001/sleep_times",  
-    }).then(response => {
+    // axios({
+    //   method: "get",
+    //   url: "http://localhost:5001/sleep_times",  
+    // }).then(response => {
+    //   console.log(response);
+    // });
+
+    axios.get("http://localhost:5001/sleep_times").then(response => {
       console.log(response);
     });
   }
