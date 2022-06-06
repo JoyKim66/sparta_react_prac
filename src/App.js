@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import axios from "axios";
 
 function App() {
 
@@ -15,12 +16,22 @@ function App() {
       },
       body: JSON.stringify(data),
     });
-    console.log(response);
-
+    console.log(response);  
   }
 
+  const callSomethingAxios = () => {
+    axios({
+      method: "get",
+      url: "http://localhost:5001/sleep_times",  
+    }).then(response => {
+      console.log(response);
+    });
+  }
+
+
   React.useEffect(() => {
-    callSomething();
+    // callSomething();
+    callSomethingAxios();
   },[]);
 
 
